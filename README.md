@@ -1,8 +1,7 @@
+pip icon, conda icon, package doi icon.
 # **Machine learning model for predicting multi-component transition metal carbides (MTMCs)**
 ### This is the manual to reproduce  results and support conclusions of ***Lattice Distortion Informed Exceptional Multi-Component Transition Metal Carbides Discovered by Machine Learning***.
 
-
-pip icon, conda icon, package doi icon.
 
 
 We recommend using a Linux/Windows operating system to run the following examples, under the [current directory](.).  
@@ -95,11 +94,11 @@ array([[294.43195 , 203.70157 , 496.67032 ,  25.989697, 632.3356  ,
 
 ### Collect DFT results
 - Collect elastic constants into a file with `csv` extension. See example: [files/HECC_properties_over_sample.CSV](files/HECC_properties_over_sample.CSV).  
-  You need to calculate other modulus from C11, C12, and C44. You may refer to these papers to calculate modulus: [PHYSICAL REVIEW B 87, 094114 (2013)](https://doi.org/10.1103/PhysRevB.87.094114) and [Journal of the European Ceramic Society 41 (2021) 6267-6274](https://doi.org/10.1016/j.jeurceramsoc.2021.05.022)  
-  The `*csv` file should contain at least these columns: `nominal_formula`, `C11`, `C12`, `C44`, `B`, `G`, `E`, `Hv`, and `real_formula`.
+- You may refer to these papers to calculate modulus from C11, C12, and C44: [PHYSICAL REVIEW B 87, 094114 (2013)](https://doi.org/10.1103/PhysRevB.87.094114) and [Journal of the European Ceramic Society 41 (2021) 6267-6274](https://doi.org/10.1016/j.jeurceramsoc.2021.05.022)  
+- The `*csv` file should contain at least these columns: `nominal_formula`, `C11`, `C12`, `C44`, `B`, `G`, `E`, `Hv`, and `real_formula`. See example: [files/HECC_properties_over_sample.CSV](files/HECC_properties_over_sample.CSV). 
 
 ### Collect input features and labels  
-```  
+```python    
 from prepare_input import x_main, y_main
 x_main('input_config.json', load_PCA=False, save_PCA=True)
 y_main('input_config.json')
@@ -110,7 +109,9 @@ Three files will be generated:
 - `x_data_after_pca.txt`: input features after [`PCA`](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html#sklearn-decomposition-pca).
 - `y_data.txt`: labels
 
-### Train
+### Train  
+- 
+
 
 ### Check training results
 
