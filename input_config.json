@@ -3,7 +3,7 @@
     "split_test": false,
     "clean_by_pearson_r": false,
     "reduce_dimension_by_pca": true,
-    "prop_precursor_path": "HECC_precursors.csv",
+    "prop_precursor_path": "files/HECC_precursors.csv",
     "props": [
         "volume_per_formula",
         "m",

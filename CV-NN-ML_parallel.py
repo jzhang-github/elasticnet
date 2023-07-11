@@ -182,3 +182,37 @@ def CV_ML_RUN(config, drop_cols:list=None):
 
     total_time = time.time() - now_time
     print("total_time", total_time, "s")
+
+def load_and_pred(config, file_name_of_x_data, write_pred_log=True,
+                  drop_cols:list=None):
+    if isinstance(config, str):
+        with open(config, 'r') as f:
+            config = json.load(f)
+    elif isinstance(config, dict):
+        config = config
+    #load new data
+    x_pred = np.loadtxt(file_name_of_x_data)
+    if drop_cols:
+        all_cols = list(range(x_pred.shape[1]))
+        remain_cols = list(set(all_cols) - set(drop_cols))
+        x_pred = x_pred[:,remain_cols]
+
+    #load the models and predict
+    predictions_all = []
+    for i in range(config["Number_of_fold"]):
+        model_name = f'{config["Model_save_path"]}/model_{i}_dense_layer.model'
+        new_model = tf.keras.models.load_model(model_name)
+        predictions = new_model.predict([x_pred])
+        predictions_all.append(predictions)
+    predictions_all = np.array(predictions_all)
+    prediction_mean = np.mean(predictions_all, axis=0)
+    predictions_all = np.concatenate(predictions_all, axis=1)
+
+    if write_pred_log:
+        if not os.path.exists(config["Prediction_save_path"]):
+            os.makedirs(config["Prediction_save_path"])
+        np.savetxt(str(config["Prediction_save_path"])+'/prediction_mean.txt',
+                   prediction_mean, fmt='%16.8f')
+        np.savetxt(str(config["Prediction_save_path"])+'/prediction_all.txt',
+                   predictions_all, fmt='%16.8f')
+    return prediction_mean, predictions_all

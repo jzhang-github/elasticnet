@@ -26,5 +26,6 @@
     "Regularization": true,
     "Model_save_path": ".\\checkpoint\\cp.ckpt",
     "Log_save_path": ".\\checkpoint\\log",
+    "Prediction_save_path": ".\\checkpoint\\pred",
     "SEED": 666
 }

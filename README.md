@@ -13,7 +13,7 @@ We recommend using a Linux/Windows operating system to run the following example
 # Table of Contents
 - [Installation](#Installation)  
 - [Example of using the well-trained model](#example-of-using-the-well-trained-model)   
-- [Train a new model from scratch](#train a new model from scratch)   
+- [Train a new model from scratch](#train-a-new-model-from-scratch)   
   - [Prepare VASP calculations](#prepare-VASP-calculations)  
   - [Collect VASP results](#collect-VASP-results)  
   - [Collect input features and labels](#collect-input-features-and-labels)  
@@ -21,11 +21,12 @@ We recommend using a Linux/Windows operating system to run the following example
   - [Check training results](#check-training-results)   
   - [Predict](#predict)  
   - [High-throughput predict](#high-throughput-predict)  
+  - [Ternary plot](#ternary-plot)  
 
 - [Other scripts](#other-scripts)
-  - [Figure 2](#figure-2)
-  - [Figure 3](#figure-3)
-  - [Figure 4](#figure-4)
+  - [get rom](#get-rom)
+  - [get vec](#get-vec)
+  - [analysis](#figure-4)
   - [Figure 5](#figure-5)
 
 # Installation
@@ -61,16 +62,24 @@ pip install mtmc -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 **Requirements file:** [requirements.txt](requirements.txt)
 
-**Key modules**
+**Key modules**  
 ```
-numpy==1.19.5   
-scikit-learn==0.24.2   
-tensorflow==2.4.1   
-ase==3.21.1   
-pymatgen==2020.11.11   
+numpy==1.25.0    
+scikit-learn==1.2.2   
+tensorflow==2.10.0   
+ase==3.22.1  
+pandas==1.5.3
 ```
 
-# Example of using the well-trained model
+# Example of using the well-trained model  
+
+- Download the well-trained parameters: [checkpoint](#checkpoint)  
+- Run the following python code:  
+```
+from HeccLib import predict_formula  
+pf = predict_formula(config='input_config.json',ckpt_file='checkpoint')  
+pf.predict(*['VNbTa', 'TiNbTa'])  
+```
 
 # Train a new model from scratch
 
@@ -85,3 +94,6 @@ pymatgen==2020.11.11
 ### Predict
 
 ### High-throughput predict
+
+### Ternary plot
+
