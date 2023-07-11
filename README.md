@@ -25,7 +25,6 @@ We recommend using a Linux/Windows operating system to run the following example
 - [Other scripts](#other-scripts)
   - [Get ROM](#get-ROM)
   - [get VEC](#get-VEC)
-  - [analysis](#figure-4)
 
 - [Abbreviations](#abbreviations)
 
