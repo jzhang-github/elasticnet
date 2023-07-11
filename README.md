@@ -32,14 +32,36 @@ We recommend using a Linux/Windows operating system to run the following example
 
 ### Install under [conda](https://conda.io/projects/conda/en/latest/user-guide/install/index.html) environment
 
-  ```
-  conda create -n MTMC python==3.10
-  ```
+- Create a new environment   
+```
+conda create -n MTMC python==3.10
+```
+
+- Activate the environment  
+```
+conda activate MTMC
+```
+
+- Install package  
+```
+conda install mtmc
+```
+
+### Alternatively, you can install with [pip](https://pypi-url).
+- Install the package  
+```
+pip install mtmc
+```
+
+- **If your IP locates in mainland China, you may need to install it from the tsinghua mirror.**  
+```
+pip install mtmc -i https://pypi.tuna.tsinghua.edu.cn/simple
+```
+
 
 **Requirements file:** [requirements.txt](requirements.txt)
 
 **Key modules**
-
 ```
 numpy==1.19.5   
 scikit-learn==0.24.2   
