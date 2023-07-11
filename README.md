@@ -80,6 +80,13 @@ from HeccLib import predict_formula
 pf = predict_formula(config='input_config.json',ckpt_file='checkpoint')  
 pf.predict(*['VNbTa', 'TiNbTa'])  
 ```
+- The mechanical properties of (VNbTa)C3 and (TiNbTa)C3 will show on the screen. The specific moduli of each column are: B, G, E, Hv, C11, C44.
+```
+array([[294.43195 , 203.70157 , 496.67032 ,  25.989697, 632.3356  ,
+        175.50716 ],
+       [283.17245 , 201.96506 , 489.7816  ,  26.824062, 607.07336 ,
+        178.52579 ]], dtype=float32)
+```
 
 # Train a new model from scratch
 
