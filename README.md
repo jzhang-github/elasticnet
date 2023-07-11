@@ -1,6 +1,10 @@
 # **Machine learning model for predicting multi-component transition metal carbides (MTMCs)**
 ### This is the manual to reproduce  results and support conclusions of ***Lattice Distortion Informed Exceptional Multi-Component Transition Metal Carbides Discovered by Machine Learning***.
 
+
+pip icon, conda icon, package doi icon.
+
+
 We recommend using a Linux/Windows operating system to run the following examples, under the [current directory](.).  
 
 
@@ -25,17 +29,23 @@ We recommend using a Linux/Windows operating system to run the following example
   - [Figure 5](#figure-5)
 
 # Installation
+
+### Install under [conda](https://conda.io/projects/conda/en/latest/user-guide/install/index.html) environment
+
+  ```
+  conda create -n MTMC python==3.10
+  ```
+
 **Requirements file:** [requirements.txt](requirements.txt)
 
 **Key modules**
+
 ```
-dgl-cu110 (dgl.__version__ = '0.6.1')  
-numpy==1.19.5
-scikit-learn==0.24.2
-tensorflow==2.5.0
-tensorflow-gpu==2.4.0
-ase==3.21.1
-pymatgen==2020.11.11
+numpy==1.19.5   
+scikit-learn==0.24.2   
+tensorflow==2.4.1   
+ase==3.21.1   
+pymatgen==2020.11.11   
 ```
 
 # Example of using the well-trained model
