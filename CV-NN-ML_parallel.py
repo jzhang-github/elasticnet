@@ -1,7 +1,6 @@
 
 #import modules
 import time
-now_time = time.time()
 import tensorflow              as tf
 import numpy                   as np
 import os
@@ -10,40 +9,8 @@ import sklearn
 from   sklearn.model_selection import KFold
 import json
 
-#important global variables
-#==========================
-if __name__ == '__main__':
-    LAYERS = 4
-    NODES  = 80
-    Train_model          = True                         #run the training or not.
-    feature_file         = 'x_data_after_pca.txt'
-    label_file           = 'y_data.txt'
-    Activation_function  = 'elu'                     #alternatives: relu, softmax, sigmoid, tanh
-    Output_activation    = 'elu' # 'relu' # 'softmax'
-    Optimizer            = 'adam'                        #alternatives: sgd, adagrad, adadelta, adam
-    Cost_function        = tf.keras.losses.MeanAbsolutePercentageError() # tf.keras.losses.MeanAbsoluteError() # alternatives: 'mse'
-    Metrics              = ['mean_absolute_error', 'mean_absolute_percentage_error'] # 'sparse_categorical_accuracy' #metrics are dependent on activation function. alternatives: binary_accuracy, categorical_accuracy, etc.
-    Nodes_per_layer      = [int(NODES) for x in range(int(LAYERS))] #number of nodes of hidden layer
-    Number_of_out_node   = 'auto'                             #number of categories
-    Batch_size           = 16                            #2^n, n is a integer.
-    Epochs               = 1000
-    Number_of_fold       = 5
-    #Early_stop           = 500                           #this tag controls early stoping. If the performance does not improve for 500 steps, the model will stop.
-    Model_save           = True                         #as you can learn from this tag.
-    Regularization       = True
-    Verbose              = 0                             #alternatives: 0, no output on the screen; 1, output with progress bar; 2, output without progress bar.
-    Model_save_path      = os.path.join('.', 'checkpoint', 'cp.ckpt')
-    Log_save_path        = os.path.join('.', 'checkpoint', 'log')
-#==========================
-    Load_and_predict     = False                         #if True, load saved model and predict samples.
-    Prediction_save_path = './checkpoint/pred'
-    Predict_feature_file = 'x_test.txt'
-#==========================
-    SEED                 = 666
-#==========================
-
 #import data, features and labels
-def import_data(drop_col:list=None):
+def import_data(feature_file, label_file, SEED, drop_col:list=None):
     x_data = np.loadtxt(feature_file)
     y_data = np.loadtxt(label_file)
 
@@ -149,34 +116,27 @@ def Training_module(kwargs):
                              mae, val_mae, mape, val_mape, loss, val_loss]).T
         np.savetxt(f, out_log, fmt=['%5.0f', '%14.8f', '%14.8f', '%14.8f', '%14.8f', '%14.8f', '%14.8f'])
 
-def CV_ML_RUN(drop_cols:list=None):
-    kf = KFold(n_splits=Number_of_fold)
+def CV_ML_RUN(config, drop_cols:list=None):
+    now_time = time.time()
+    if isinstance(config, str):
+        with open(config, 'r') as f:
+            config = json.load(f)
+    elif isinstance(config, dict):
+        config = config
+
+    kf = KFold(n_splits=config["Number_of_fold"])
     model_index = 0
 
     #create log file
-    if not os.path.exists(Log_save_path):
-        os.makedirs(Log_save_path)
+    if not os.path.exists(config["Log_save_path"]):
+        os.makedirs(config["Log_save_path"])
 
     print('Parent process %s.' % os.getpid())
-    x_data, y_data  = import_data(drop_cols)
-
-    config = {
-        # 'Number_of_layers': Number_of_layers,
-        'Nodes_per_layer': Nodes_per_layer,
-        'Activation_function': Activation_function,
-        'Number_of_out_node': Number_of_out_node,
-        'Output_activation': Output_activation,
-        'Optimizer': Optimizer,
-        'Cost_function': Cost_function,
-        'Metrics': Metrics,
-        'Batch_size': Batch_size,
-        'Epochs': Epochs,
-        'Verbose': Verbose,
-        'x_data': x_data,
-        'y_data': y_data,
-        'Regularization': Regularization,
-        'Model_save_path': Model_save_path,
-        'Log_save_path': Log_save_path}
+    # x_data, y_data  = import_data(drop_cols)
+    x_data, y_data  = import_data(config["feature_file"],
+                                  config["label_file"],
+                                  config["SEED"],
+                                  drop_col=drop_cols)
 
     processes = []
     for x_train_index, x_test_index in kf.split(x_data):
@@ -193,15 +153,15 @@ def CV_ML_RUN(drop_cols:list=None):
     print('All subprocesses done.')
 
     # write the global result of every CV
-    global_acc_loss_filename = f'{len(Nodes_per_layer)}_layer-{"".join([f"{x}_" for x in Nodes_per_layer])}nodes.global.acc.loss'
-    global_acc_loss_path     = os.path.join(Log_save_path, global_acc_loss_filename)
+    global_acc_loss_filename = f'{len(config["Nodes_per_layer"])}_layer-{"".join([f"{x}_" for x in config["Nodes_per_layer"]])}nodes.global.acc.loss'
+    global_acc_loss_path     = os.path.join(config["Log_save_path"], global_acc_loss_filename)
 
     with open(global_acc_loss_path, 'w') as f:
         print('model                 mae       val_mae          mape      val_mape          loss      val_loss', file=f)
         mae_all, val_mae_all, mape_all, val_mape_all, loss_all, val_loss_all = [], [], [], [], [], []
-        for i in range(Number_of_fold):
-            fname = f'model_{i}-{len(Nodes_per_layer)}_layer-{"".join([f"{x}_" for x in Nodes_per_layer])}nodes.acc.loss'
-            with open(os.path.join(Log_save_path, fname), 'r') as f_i:
+        for i in range(config["Number_of_fold"]):
+            fname = f'model_{i}-{len(config["Nodes_per_layer"])}_layer-{"".join([f"{x}_" for x in config["Nodes_per_layer"]])}nodes.acc.loss'
+            with open(os.path.join(config["Log_save_path"], fname), 'r') as f_i:
                 f_i.readline()
                 data = np.loadtxt(f_i)
             epoch, mae, val_mae, mape, val_mape, loss, val_loss = data[-1]
@@ -222,40 +182,3 @@ def CV_ML_RUN(drop_cols:list=None):
 
     total_time = time.time() - now_time
     print("total_time", total_time, "s")
-
-def load_and_pred(file_name_of_x_data, write_pred_log=True,
-                  drop_cols:list=None):
-    #load new data
-    x_pred = np.loadtxt(file_name_of_x_data)
-    if drop_cols:
-        all_cols = list(range(x_pred.shape[1]))
-        remain_cols = list(set(all_cols) - set(drop_cols))
-        x_pred = x_pred[:,remain_cols]
-
-    #load the models and predict
-    predictions_all = []
-    for i in range(Number_of_fold):
-        model_name = f'{Model_save_path}/model_{i}_dense_layer.model'
-        new_model = tf.keras.models.load_model(model_name)
-        predictions = new_model.predict([x_pred])
-        predictions_all.append(predictions)
-    predictions_all = np.array(predictions_all)
-    prediction_mean = np.mean(predictions_all, axis=0)
-    predictions_all = np.concatenate(predictions_all, axis=1)
-
-    if write_pred_log:
-        if not os.path.exists(Prediction_save_path):
-            os.makedirs(Prediction_save_path)
-        np.savetxt(str(Prediction_save_path)+'/prediction_mean.txt',
-                   prediction_mean, fmt='%16.8f')
-        np.savetxt(str(Prediction_save_path)+'/prediction_all.txt',
-                   predictions_all, fmt='%16.8f')
-    return prediction_mean, predictions_all
-
-#train and test, main part
-if __name__ == '__main__':
-    if Train_model:
-        CV_ML_RUN(drop_cols=None)
-        load_and_pred(feature_file, write_pred_log=True, drop_cols=None)
-    if Load_and_predict:
-        load_and_pred(Predict_feature_file, write_pred_log=True,drop_cols=None)
