@@ -11,6 +11,8 @@ import json
 import pandas as pd
 import os
 from ase.io import read, write
+import time
+import tensorflow as tf
 
 class FileTypeError(Exception):
     pass
@@ -620,10 +622,105 @@ class soap_feature(object):
                                                             'soap_pca_model.joblib'),
                                     save_file=True)
 
-# # debug
-# with open('input_config.json', 'r') as f:
-# #     soap_config = json.load(f)['soap_config']
-# for s in species:
-#     atoms_tmp = read(f'CONTCAR_{s}')
-#     atoms_tmp = atoms_tmp.repeat(2)
-#     write(f'CONTCAR_{s}', atoms_tmp)
+def high_throughput_predict():
+    num_comp = 'all'
+    num, formulas = [], []
+    start = time.time()
+    step = 0
+    for Ti_c in range(0, 11):
+        end = 11 - Ti_c
+        for V_c in range(0, end):
+            end = 11 - Ti_c - V_c
+            for Cr_c in range(0, end):
+                end = 11 - Ti_c - V_c - Cr_c
+                for Zr_c in range(0, end):
+                    end = 11 - Ti_c - V_c - Cr_c - Zr_c
+                    for Nb_c in range(0, end):
+                        end = 11 - Ti_c - V_c - Cr_c - Zr_c - Nb_c
+                        for Mo_c in range(0, end):
+                            end = 11 - Ti_c - V_c - Cr_c - Zr_c - Nb_c - Mo_c
+                            for Hf_c in range(0, end):
+                                end = 11 - Ti_c - V_c - Cr_c - Zr_c - Nb_c - Mo_c - Hf_c
+                                for Ta_c in range(0, end):
+                                    W_c = 11 - Ti_c - V_c - Cr_c - Zr_c - Nb_c - Mo_c - Hf_c - Ta_c
+                                    # for W_c in range(0, end):
+                                    step += 1
+                                    formula = f'Ti{Ti_c}V{V_c}Cr{Cr_c}Zr{Zr_c}Nb{Nb_c}Mo{Mo_c}Hf{Hf_c}Ta{Ta_c}W{W_c}'
+
+                                    n_comp, real_formula = get_number_of_components(formula)
+                                    # if n_comp == num_comp:
+                                    # if n_comp > 1:
+                                    formulas.append(real_formula)
+                                    num.append(n_comp)
+    dur = time.time() - start
+    formulas = [x for x in formulas if x != '']
+    num = [x for x in num if x != 0]
+    # predict
+    pf = predict_formula()
+
+    prediction_mean = pf.predict(*formulas)
+
+    # save results
+    # np.savetxt(f'ht_predict_{num_comp}_metals.txt', prediction_mean, fmt='%.8f')
+    df0 = pd.DataFrame({
+                        'formula' : formulas
+                        })
+    df1 = pd.DataFrame(prediction_mean, columns=['B', 'G', 'E', 'Hv', 'C11', 'C44'])
+    df = pd.concat([df0, df1], axis=1)
+
+    df_B = df.sort_values(by=['B'], ascending=False)
+    df_G = df.sort_values(by=['G'], ascending=False)
+    df_E = df.sort_values(by=['E'], ascending=False)
+    df_Hv = df.sort_values(by=['Hv'], ascending=False)
+    df_C11 = df.sort_values(by=['C11'], ascending=False)
+    df_C44 = df.sort_values(by=['C44'], ascending=False)
+
+    with pd.ExcelWriter('ANN_predictions.xlsx') as writer:
+        df.to_excel(writer, sheet_name='all_pred')
+        df_B.to_excel(writer, sheet_name='B')
+        df_G.to_excel(writer, sheet_name='G')
+        df_E.to_excel(writer, sheet_name='E')
+        df_Hv.to_excel(writer, sheet_name='Hv')
+        df_C11.to_excel(writer, sheet_name='C11')
+        df_C44.to_excel(writer, sheet_name='C44')
+
+
+def ternary_plot(elements = ['Ti', 'Nb', 'Ta']):
+    pf = predict_formula(config='input_config.json',
+                         ckpt_file='checkpoint')
+
+    formulas, cons = [], []
+
+    grid_num = 31
+    # generate formulas
+    for a in range(0, grid_num):
+        end = grid_num - a
+        for b in range(0, end):
+            c = grid_num - a - b - 1
+            formula = f'{elements[0]}{a}{elements[1]}{b}{elements[2]}{c}'
+            _, formula = get_number_of_components(formula)
+            if _ > 0:
+                formulas.append(formula)
+                cons.append([a/(grid_num - 1), b/(grid_num - 1), c/(grid_num - 1)])
+
+    prediction_mean = pf.predict(*formulas)
+    result = np.hstack([cons, prediction_mean])
+
+    # save results
+    df = pd.DataFrame(result, columns=elements+['B','G','E','Hv','C11','C44'])
+    if not os.path.exists('phase_diagrams'):
+        os.mkdir('phase_diagrams')
+    df.to_csv(os.path.join('phase_diagrams', f'{"-".join(elements)}_diagram.csv'))
+
+def get_rom(config='input_config.json', formulas='formulas.txt', props=['B', 'G', 'E', 'Hv']):
+    with open('input_config.json', 'r') as f:
+        config = json.load(f)
+
+    formulas = np.loadtxt('formulas.txt', dtype=str)
+
+    # get properties of precursors
+    hfg = HecFeatureGenerator(prop_precursor_path=config['prop_precursor_path'],
+                                  props = config['props'],
+                                  operators=config['operators'])
+    ROM = hfg.get_ave_from_formula(props, *formulas)
+    return ROM

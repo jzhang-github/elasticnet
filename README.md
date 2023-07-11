@@ -23,10 +23,9 @@ We recommend using a Linux/Windows operating system to run the following example
   - [Ternary plot](#ternary-plot)  
 
 - [Other scripts](#other-scripts)
-  - [get rom](#get-rom)
-  - [get vec](#get-vec)
+  - [Get ROM](#get-ROM)
+  - [get VEC](#get-VEC)
   - [analysis](#figure-4)
-  - [Figure 5](#figure-5)
 
 - [Abbreviations](#abbreviations)
 
@@ -193,22 +192,43 @@ array([[294.43195 , 203.70157 , 496.67032 ,  25.989697, 632.3356  ,
 ```
 
 ### High-throughput predict
-- Run the script for high-throughput prediction: [hp.py](hp.py)  
-```console
-python hp.py
+- Run the following python code:  
+```python
+from HeccLib import high_throughput_predict
+high_throughput_predict() 
 ```
 - Output: ANN_predictions.xlsx
 
-### Ternary plot  
-- Modify this [line](ternary_plot.py#L18) to specify the elements. Example: `elements = ['VNbTa', 'Ti', 'Hf']`.
-- Run the script for the raw data of ternary plot: [ternary_plot.py](ternary_plot.py)  
-```console
-python ternary_plot.py
-```
+### Ternary plot 
+- Run the following python code:  
+```python
+from HeccLib import ternary_plot
+ternary_plot(elements = ['Ti', 'Nb', 'Ta'])
+``` 
+- Alternatively, `elements = ['VNbTa', 'Ti', 'Hf']`.
+
 - Output: **_diagram.csv
 - Plot.
 
 # Other scripts
+### Get ROM
+- Run the following python code:  
+```python
+from HeccLib import get_rom
+ROM = get_rom(config='input_config.json', formulas='formulas.txt', props=['B', 'G', 'E', 'Hv', 'VEC'])
+print(ROM)
+```
+
+- Output. If the formulas.txt contains ['VNbTa', 'TiNbTa'] only.
+```python
+array([[310.33922223, 210.80075867, 515.61666613,  26.20022487,
+          9.        ],
+       [291.74733333, 199.9075404 , 488.11937417,  25.52194014,
+          8.66666667]])
+```
+
+### Get VEC
+- VEC is simply the last column of [Get ROM](#get-ROM).
 
 
 
@@ -223,5 +243,6 @@ python ternary_plot.py
   |  [SOAP](https://singroup.github.io/dscribe/latest/tutorials/descriptors/soap.html) | Smooth overlap of atomic positions    |  
   | NN | Neural networks |
   | CV | cross validation |
- 
+  | ROM | Rule of mixtures |
+  | VEC | Valence electron concentration | 
 
