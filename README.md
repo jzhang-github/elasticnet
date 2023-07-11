@@ -114,9 +114,7 @@ array([[294.43195 , 203.70157 , 496.67032 ,  25.989697, 632.3356  ,
   | HECC_properties_path   | str | A file contains the collected properties of MTMCs. |
   | labels   | list | A list of label names that need to fit/learn. |
   | soap_features   | bool | Whether to use [SOAP](https://singroup.github.io/dscribe/latest/tutorials/descriptors/soap.html) descriptor. |
-  | soap_config   | dict | A python dict that defines the configuration of [SOAP](https://singroup.github.io/dscribe/latest/tutorials/descriptors/soap.html) descriptor.
-  - input_structure_type: 'POSCAR' or 'CONTCAR'. Use 'POSCAR' or 'CONTCAR' to generate [SOAP](https://singroup.github.io/dscribe/latest/tutorials/descriptors/soap.html) features.
-  - You can find the explanations for other specifications here: [`SOAP.__init__`](https://singroup.github.io/dscribe/latest/tutorials/descriptors/soap.html#dscribe.descriptors.soap.SOAP.__init__) |
+  | soap_config   | dict | A python dict that defines the configuration of [SOAP](https://singroup.github.io/dscribe/latest/tutorials/descriptors/soap.html) descriptor.   - input_structure_type: 'POSCAR' or 'CONTCAR'. Use 'POSCAR' or 'CONTCAR' to generate [SOAP](https://singroup.github.io/dscribe/latest/tutorials/descriptors/soap.html) features.   - You can find the explanations for other specifications here: [`SOAP.__init__`](https://singroup.github.io/dscribe/latest/tutorials/descriptors/soap.html#dscribe.descriptors.soap.SOAP.__init__) |
 
 - [`train.json`](train.json): Define how to train the machine-learning model.
 
