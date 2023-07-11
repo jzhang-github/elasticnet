@@ -33,7 +33,7 @@ We recommend using a Linux/Windows operating system to run the following example
 ### Install under [conda](https://conda.io/projects/conda/en/latest/user-guide/install/index.html) environment
 
 - Create a new environment   
-```ps
+```console
 conda create -n MTMC python==3.10
 ```
 
@@ -54,7 +54,7 @@ pip install mtmc
 ```
 
 - **If your IP locates in mainland China, you may need to install it from the tsinghua mirror.**  
-```
+```console
 pip install mtmc -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
@@ -97,6 +97,16 @@ array([[294.43195 , 203.70157 , 496.67032 ,  25.989697, 632.3356  ,
 - You may refer to these papers to calculate modulus from C11, C12, and C44: [PHYSICAL REVIEW B 87, 094114 (2013)](https://doi.org/10.1103/PhysRevB.87.094114) and [Journal of the European Ceramic Society 41 (2021) 6267-6274](https://doi.org/10.1016/j.jeurceramsoc.2021.05.022)  
 - The `*csv` file should contain at least these columns: `nominal_formula`, `C11`, `C12`, `C44`, `B`, `G`, `E`, `Hv`, and `real_formula`. See example: [files/HECC_properties_over_sample.CSV](files/HECC_properties_over_sample.CSV). 
 
+### Prepare configurations files  
+- `input_config.json`: Define how to generate input features and labels.  
+  |  Variable             | Type   | Meaning                                                                                                       |  
+  |  -------------------- | ----   | ------------------------------------------------------------------------------------------------------------  |  
+  | include_more          | `bool` | If `True`, the `bulk_energy_per_formula` and `volume_per_formula` are also be included in the input features. |
+  | split_test            | `bool` | If `True`, a new test set will be split from the dataset. For cross validation, it is OK to set this as `False`. |  
+  | clean_by_pearson_r    | `bool` | Clean input features. Highly correlated features will be removed if this is `True`. |  
+
+- `train.json`: Define how to train the machine-learning model.
+
 ### Collect input features and labels  
 ```python    
 from prepare_input import x_main, y_main
@@ -110,10 +120,22 @@ Three files will be generated:
 - `y_data.txt`: labels
 
 ### Train  
-- 
+- Run the following python code on Linux OS.  
+```python
+from ANN import CV_ML_RUN, load_and_pred
+if __name__ == '__main__':
+    CV_ML_RUN('train.json')
+    load_and_pred('train.json', 'x_data_after_pca.txt', write_pred_log=True, drop_cols=None)
+```
 
+- If you want to train the model on windows OS, you need to run the source code directly.  
+```console
+python ANN.py
+```
 
 ### Check training results
+- Generated files/folders  
+  - `checkpoint`: 
 
 ### Predict
 

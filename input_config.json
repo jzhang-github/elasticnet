@@ -4,6 +4,7 @@
     "clean_by_pearson_r": false,
     "reduce_dimension_by_pca": true,
     "prop_precursor_path": "files/HECC_precursors.csv",
+    "model_save_path": "checkpoint",
     "props": [
         "volume_per_formula",
         "m",

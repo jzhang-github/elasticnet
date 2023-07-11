@@ -19,6 +19,9 @@ def x_main(config:dict, load_PCA=False, save_PCA=True):
     else:
         raise FileTypeError('The input config should be a name of json file or a `dict`.')
 
+    if not os.path.exists(config["model_save_path"]):
+        os.makedirs(config["model_save_path"])
+
     config = {
         'include_more': config['include_more']\
             if config.__contains__('include_more') else False,
@@ -30,6 +33,8 @@ def x_main(config:dict, load_PCA=False, save_PCA=True):
             if config.__contains__('reduce_dimension_by_pca') else True,
         'prop_precursor_path':  config['prop_precursor_path']\
             if config.__contains__('prop_precursor_path') else 'HECC_precursors.csv',
+        'model_save_path':  config['model_save_path']\
+            if config.__contains__('model_save_path') else 'checkpoint',
         'props': config['props']\
             if config.__contains__('props') else [# 'mixing_entropy', # the `HeccLib.HecFeatureGenerator.get_input_feature_from_formula` includes mixing_entropy automaticlly.
                                                   'volume_per_formula',
@@ -84,7 +89,7 @@ def x_main(config:dict, load_PCA=False, save_PCA=True):
         test_features = features[test_index]
         features = features[train_index]
         np.savetxt('x_test.txt', test_features, fmt='%.16f')
-        np.savetxt(os.path.join('checkpoint',
+        np.savetxt(os.path.join(config["model_save_path"],
                                 'test_index.txt'),
                    test_index, fmt='%.0f')
 
@@ -98,7 +103,7 @@ def x_main(config:dict, load_PCA=False, save_PCA=True):
         hfp.reduce_dimension_by_PCA(n_components=0.995,
                                         save_model=save_PCA,
                                         load_model=load_PCA,
-                                        model_path=os.path.join('checkpoint',
+                                        model_path=os.path.join(config["model_save_path"],
                                                                 'pca_model.joblib'),
                                         save_file=True)
 
@@ -125,7 +130,7 @@ def y_main(config:dict):
     labels = np.vstack(labels).T
 
     if config['split_test']:
-        test_index  = np.loadtxt(os.path.join('checkpoint', 'test_index.txt'),
+        test_index  = np.loadtxt(os.path.join(config["model_save_path"], 'test_index.txt'),
                                  dtype=int)
         test_labels = labels[test_index]
         labels      = labels[train_index]

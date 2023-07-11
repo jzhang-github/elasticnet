@@ -24,8 +24,8 @@
     "feature_file": "x_data_after_pca.txt",
     "label_file": "y_data.txt",
     "Regularization": true,
-    "Model_save_path": ".\\checkpoint\\cp.ckpt",
-    "Log_save_path": ".\\checkpoint\\log",
-    "Prediction_save_path": ".\\checkpoint\\pred",
+    "Model_save_path": "./checkpoint/cp.ckpt",
+    "Log_save_path": "./checkpoint/log",
+    "Prediction_save_path": "./checkpoint/pred",
     "SEED": 666
 }
