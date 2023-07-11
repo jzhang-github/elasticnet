@@ -100,7 +100,7 @@ array([[294.43195 , 203.70157 , 496.67032 ,  25.989697, 632.3356  ,
 - The `*csv` file should contain at least these columns: `nominal_formula`, `C11`, `C12`, `C44`, `B`, `G`, `E`, `Hv`, and `real_formula`. See example: [files/HECC_properties_over_sample.CSV](files/HECC_properties_over_sample.CSV). 
 
 ### Prepare configurations files  
-- [`input_config.json`](input_config.json): Define how to generate input features and labels. You are recommended to download this file and modify then.  
+- [`input_config.json`](input_config.json): defines how to generate input features and labels. You are recommended to download this file and modify then.  
   |  Variable             | Type   | Meaning                                                                                                       |  
   |  -------------------- | ----   | ------------------------------------------------------------------------------------------------------------  |  
   | include_more          | bool | If `True`, the `bulk_energy_per_formula` and `volume_per_formula` are also be included in the input features. |
@@ -116,7 +116,7 @@ array([[294.43195 , 203.70157 , 496.67032 ,  25.989697, 632.3356  ,
   | soap_features   | bool | Whether to use [SOAP](https://singroup.github.io/dscribe/latest/tutorials/descriptors/soap.html) descriptor. |
   | soap_config   | dict | A python dict that defines the configuration of [SOAP](https://singroup.github.io/dscribe/latest/tutorials/descriptors/soap.html) descriptor.   - input_structure_type: 'POSCAR' or 'CONTCAR'. Use 'POSCAR' or 'CONTCAR' to generate [SOAP](https://singroup.github.io/dscribe/latest/tutorials/descriptors/soap.html) features.   - You can find the explanations for other specifications here: [`SOAP.__init__`](https://singroup.github.io/dscribe/latest/tutorials/descriptors/soap.html#dscribe.descriptors.soap.SOAP.__init__) |
 
-- [`train.json`](train.json): Define how to train the machine-learning model.
+- [`train.json`](train.json): defines how to train the machine-learning model.
 
   |  Variable             | Type   | Meaning                                                                                                       |  
   |  -------------------- | ----   | ------------------------------------------------------------------------------------------------------------  | 
@@ -127,7 +127,6 @@ array([[294.43195 , 203.70157 , 496.67032 ,  25.989697, 632.3356  ,
   |  Activation_function | str   | Activation function of hidden layers. Alternatives: 'relu', 'softmax', 'sigmoid', 'tanh' |  
   |  Output_activation | str   | Activation function of the output layer. Alternatives: 'relu', 'softmax', 'sigmoid', 'tanh' |  
   |  Number_of_out_node | int/'auto'   | Number of nodes of the output layer. If there is only *one* column in the `label_file`, this variable should be `1`. 'auto' is for multiple columns. |  
-
   |  Optimizer | str   | The name of the optimizer. Examples: [`tf.keras.optimizers`](https://www.tensorflow.org/api_docs/python/tf/keras/optimizers) |
   |  Cost_function | str   | Name of cost function in `Tensorflow`. Examples: [`tf.keras.losses`](https://www.tensorflow.org/api_docs/python/tf/keras/losses) |
   |  Metrics | list   | A list of metrics to evaluate the model. Examples: [`tf.keras.metrics`](https://www.tensorflow.org/api_docs/python/tf/keras/metrics) |
@@ -161,7 +160,7 @@ if __name__ == '__main__':
     load_and_pred('train.json', 'x_data_after_pca.txt', write_pred_log=True, drop_cols=None)
 ```
 
-- If you want to train the model on windows OS, you need to run the source code directly.  
+- If you want to train the model on windows OS, you need to run the [source code](ANN.py) directly.  
 ```console
 python ANN.py
 ```
