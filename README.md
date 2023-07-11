@@ -157,7 +157,7 @@ python ANN.py
 
 
 
-# Abbreviations
+# Abbreviations  
 
 |  Abbr.                | Full name   |  
 |  -------------------- | ---- -----  |  
