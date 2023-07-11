@@ -33,23 +33,23 @@ We recommend using a Linux/Windows operating system to run the following example
 ### Install under [conda](https://conda.io/projects/conda/en/latest/user-guide/install/index.html) environment
 
 - Create a new environment   
-```
+```console
 conda create -n MTMC python==3.10
 ```
 
 - Activate the environment  
-```
+```console
 conda activate MTMC
 ```
 
 - Install package  
-```
+```console
 conda install mtmc
 ```
 
 ### Alternatively, you can install with [pip](https://pypi-url).
 - Install the package  
-```
+```console
 pip install mtmc
 ```
 
@@ -74,13 +74,13 @@ pandas==1.5.3
 
 - Download the well-trained parameters: [checkpoint](checkpoint)  
 - Run the following python code:  
-```
+```python
 from HeccLib import predict_formula  
 pf = predict_formula(config='input_config.json',ckpt_file='checkpoint')  
 pf.predict(*['VNbTa', 'TiNbTa'])  
 ```
 - The mechanical properties of (VNbTa)C3 and (TiNbTa)C3 will show on the screen. The specific modulus of each column is: B, G, E, Hv, C11, C44.
-```
+```python
 array([[294.43195 , 203.70157 , 496.67032 ,  25.989697, 632.3356  ,
         175.50716 ],
        [283.17245 , 201.96506 , 489.7816  ,  26.824062, 607.07336 ,
