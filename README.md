@@ -28,7 +28,7 @@ We recommend using a Linux/Windows operating system to run the following example
   - [analysis](#figure-4)
   - [Figure 5](#figure-5)
 
-- [Abbreviations](abbreviations)
+- [Abbreviations](#abbreviations)
 
 # Installation
 
@@ -111,7 +111,12 @@ array([[294.43195 , 203.70157 , 496.67032 ,  25.989697, 632.3356  ,
   | model_save_path       | str | Path for storing [`PCA`](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html#sklearn-decomposition-pca) model and other information when generating input features and labels |  
   | props                 | list | A list of properties that are encoded into the input features. Choose among the column names of [files/HECC_precursors.csv](files/HECC_precursors.csv).  |
   | operators    | list | A list of operators to expand the input dimension. Choose among: ['cube', 'exp_n', 'exp', 'plus', 'minus', 'multiply', 'sqrt', 'log10', 'log', 'square']. | 
-  | HECC_properties_path   | str | A file contains the properties of MTMCs. |
+  | HECC_properties_path   | str | A file contains the collected properties of MTMCs. |
+  | labels   | list | A list of label names that need to fit/learn. |
+  | soap_features   | bool | Whether to use [SOAP](https://singroup.github.io/dscribe/latest/tutorials/descriptors/soap.html) descriptor. |
+  | soap_config   | dict | A python dict that defines the configuration of [SOAP](https://singroup.github.io/dscribe/latest/tutorials/descriptors/soap.html) descriptor.
+  - input_structure_type: 'POSCAR' or 'CONTCAR'. Use 'POSCAR' or 'CONTCAR' to generate [SOAP](https://singroup.github.io/dscribe/latest/tutorials/descriptors/soap.html) features.
+  - You can find the explanations for other specifications here: [`SOAP.__init__`](https://singroup.github.io/dscribe/latest/tutorials/descriptors/soap.html#dscribe.descriptors.soap.SOAP.__init__) |
 
 - [`train.json`](train.json): Define how to train the machine-learning model.
 
@@ -163,6 +168,7 @@ python ANN.py
   |  -------------------- | ----------  |  
   |  MTMC                 | Multi-component transition metal carbides    |  
   |  HECC                 | High-entropy carbide ceramic    |  
-  |  ML                   | Machine learning    |  
+  |  ML                   | Machine learning    | 
+  |  [SOAP](https://singroup.github.io/dscribe/latest/tutorials/descriptors/soap.html) | Smooth overlap of atomic positions    |  
  
 
