@@ -1,5 +1,0 @@
-# .gitignore file
-__pycache__
-checkpoint
-files
-*.json

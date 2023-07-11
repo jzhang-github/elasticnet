@@ -1,0 +1,6 @@
+# .gitignore file
+__pycache__
+*.json
+y_data.txt
+x_data_after_pca.txt
+x_data_init.txt
