@@ -25,7 +25,7 @@
         "square",
         "cube"
     ],
-    "HECC_properties_path": "HECC_properties_over_sample.CSV",
+    "HECC_properties_path": "files/HECC_properties_over_sample.CSV",
     "labels": [
         "B",
         "G",

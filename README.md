@@ -14,8 +14,8 @@ We recommend using a Linux/Windows operating system to run the following example
 - [Installation](#Installation)  
 - [Example of using the well-trained model](#example-of-using-the-well-trained-model)   
 - [Train a new model from scratch](#train-a-new-model-from-scratch)   
-  - [Prepare VASP calculations](#prepare-VASP-calculations)  
-  - [Collect VASP results](#collect-VASP-results)  
+  - [Prepare DFT calculations](#prepare-DFT-calculations)  
+  - [Collect DFT results](#collect-DFT-results)  
   - [Collect input features and labels](#collect-input-features-and-labels)  
   - [Train](#train)  
   - [Check training results](#check-training-results)   
@@ -73,14 +73,14 @@ pandas==1.5.3
 
 # Example of using the well-trained model  
 
-- Download the well-trained parameters: [checkpoint](#checkpoint)  
+- Download the well-trained parameters: [checkpoint](checkpoint)  
 - Run the following python code:  
 ```
 from HeccLib import predict_formula  
 pf = predict_formula(config='input_config.json',ckpt_file='checkpoint')  
 pf.predict(*['VNbTa', 'TiNbTa'])  
 ```
-- The mechanical properties of (VNbTa)C3 and (TiNbTa)C3 will show on the screen. The specific moduli of each column are: B, G, E, Hv, C11, C44.
+- The mechanical properties of (VNbTa)C3 and (TiNbTa)C3 will show on the screen. The specific modulus of each column is: B, G, E, Hv, C11, C44.
 ```
 array([[294.43195 , 203.70157 , 496.67032 ,  25.989697, 632.3356  ,
         175.50716 ],
@@ -89,10 +89,26 @@ array([[294.43195 , 203.70157 , 496.67032 ,  25.989697, 632.3356  ,
 ```
 
 # Train a new model from scratch
+### Prepare DFT calculations
+- Bulk optimization.
+- Elastic constants calculation.
 
-### Prepare VASP calculations
+### Collect DFT results
+- Collect elastic constants into a file with `csv` extension. See example: [files/HECC_properties_over_sample.CSV](files/HECC_properties_over_sample.CSV).  
+  You need to calculate other modulus from C11, C12, and C44. You may refer to these papers to calculate modulus: [PHYSICAL REVIEW B 87, 094114 (2013)](https://doi.org/10.1103/PhysRevB.87.094114) and [Journal of the European Ceramic Society 41 (2021) 6267-6274](https://doi.org/10.1016/j.jeurceramsoc.2021.05.022)  
+  The `*csv` file should contain at least these columns: `nominal_formula`, `C11`, `C12`, `C44`, `B`, `G`, `E`, `Hv`, and `real_formula`.
 
-### Collect input features and labels
+### Collect input features and labels  
+```  
+from prepare_input import x_main, y_main
+x_main('input_config.json', load_PCA=False, save_PCA=True)
+y_main('input_config.json')
+```
+
+Three files will be generated:  
+- `x_data_init.txt`: input features without [`PCA`](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html#sklearn-decomposition-pca).  
+- `x_data_after_pca.txt`: input features after [`PCA`](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html#sklearn-decomposition-pca).
+- `y_data.txt`: labels
 
 ### Train
 
