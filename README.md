@@ -159,10 +159,10 @@ python ANN.py
 
 # Abbreviations
 
-|  Abbr.                | Full name   |
-|  -------------------- | ---- -----  |
-|  MTMC                 | Multi-component transition metal carbides    |
-|  HECC                 | High-entropy carbide ceramic    |
-|  ML                 | Machine learning    |
+|  Abbr.                | Full name   |  
+|  -------------------- | ---- -----  |  
+|  MTMC                 | Multi-component transition metal carbides    |  
+|  HECC                 | High-entropy carbide ceramic    |  
+|  ML                 | Machine learning    |  
 
 
