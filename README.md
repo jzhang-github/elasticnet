@@ -28,6 +28,8 @@ We recommend using a Linux/Windows operating system to run the following example
   - [analysis](#figure-4)
   - [Figure 5](#figure-5)
 
+- [Abbreviations](abbreviations)
+
 # Installation
 
 ### Install under [conda](https://conda.io/projects/conda/en/latest/user-guide/install/index.html) environment
@@ -98,14 +100,20 @@ array([[294.43195 , 203.70157 , 496.67032 ,  25.989697, 632.3356  ,
 - The `*csv` file should contain at least these columns: `nominal_formula`, `C11`, `C12`, `C44`, `B`, `G`, `E`, `Hv`, and `real_formula`. See example: [files/HECC_properties_over_sample.CSV](files/HECC_properties_over_sample.CSV). 
 
 ### Prepare configurations files  
-- `input_config.json`: Define how to generate input features and labels.  
+- [`input_config.json`](input_config.json): Define how to generate input features and labels. You are recommended to download this file and modify then.  
   |  Variable             | Type   | Meaning                                                                                                       |  
   |  -------------------- | ----   | ------------------------------------------------------------------------------------------------------------  |  
   | include_more          | `bool` | If `True`, the `bulk_energy_per_formula` and `volume_per_formula` are also be included in the input features. |
   | split_test            | `bool` | If `True`, a new test set will be split from the dataset. For cross validation, it is OK to set this as `False`. |  
   | clean_by_pearson_r    | `bool` | Clean input features. Highly correlated features will be removed if this is `True`. |  
+  | reduce_dimension_by_pca | `bool` | Clean input features by [`PCA`](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html#sklearn-decomposition-pca). Choose one among `clean_by_pearson_r` and `reduce_dimension_by_pca`.  |
+  | prop_precursor_path   | str | A file storing the properties of precursory binary carbides. File extension can be `*.csv` and `*.json`.  See example: [file/HECC_precursors.csv](file/HECC_precursors.csv)|
+  | model_save_path       | str | Path for storing [`PCA`](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html#sklearn-decomposition-pca) model and other information when generating input features and labels |  
+  | props                 | list | A list of properties that are encoded into the input features. Choose among the column names of [files/HECC_precursors.csv](files/HECC_precursors.csv).  |
+  | operators    | list | A list of operators to expand the input dimension. Choose among: ['cube', 'exp_n', 'exp', 'plus', 'minus', 'multiply', 'sqrt', 'log10', 'log', 'square']. | 
+  | HECC_properties_path   | str | A file contains the properties of MTMCs. |
 
-- `train.json`: Define how to train the machine-learning model.
+- [`train.json`](train.json): Define how to train the machine-learning model.
 
 ### Collect input features and labels  
 ```python    
@@ -142,4 +150,19 @@ python ANN.py
 ### High-throughput predict
 
 ### Ternary plot
+
+
+
+# Other scripts
+
+
+
+# Abbreviations
+
+|  Abbr.                | Full name   |
+|  -------------------- | ---- -----  |
+|  MTMC                 | Multi-component transition metal carbides    |
+|  HECC                 | High-entropy carbide ceramic    |
+|  ML                 | Machine learning    |
+
 
