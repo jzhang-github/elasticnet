@@ -11,7 +11,6 @@
     "Activation_function": "elu",
     "Output_activation": "elu",
     "Number_of_out_node": "auto",
-    "Output_activation": "elu",
     "Optimizer": "adam",
     "Cost_function": "mape",
     "Metrics": [
@@ -21,8 +20,6 @@
     "Batch_size": 16,
     "Epochs": 1000,
     "Verbose": 0,
-    "feature_file": "x_data_after_pca.txt",
-    "label_file": "y_data.txt",
     "Regularization": true,
     "Model_save_path": "./checkpoint/cp.ckpt",
     "Log_save_path": "./checkpoint/log",

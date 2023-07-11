@@ -118,6 +118,28 @@ array([[294.43195 , 203.70157 , 496.67032 ,  25.989697, 632.3356  ,
 
 - [`train.json`](train.json): Define how to train the machine-learning model.
 
+  |  Variable             | Type   | Meaning                                                                                                       |  
+  |  -------------------- | ----   | ------------------------------------------------------------------------------------------------------------  | 
+  |  Nodes_per_layer | list   | Number of nodes of every hidden layers |  
+  |  Number_of_fold | int   | Number of cross-validation folds. Normally `5` or `10`. |  
+  |  feature_file | str   | A file contains input features. |  
+  |  label_file | str   | A file contains labels of samples. |  
+  |  Activation_function | str   | Activation function of hidden layers. Alternatives: 'relu', 'softmax', 'sigmoid', 'tanh' |  
+  |  Output_activation | str   | Activation function of the output layer. Alternatives: 'relu', 'softmax', 'sigmoid', 'tanh' |  
+  |  Number_of_out_node | int/'auto'   | Number of nodes of the output layer. If there is only *one* column in the `label_file`, this variable should be `1`. 'auto' is for multiple columns. |  
+
+  |  Optimizer | str   | The name of the optimizer. Examples: [`tf.keras.optimizers`](https://www.tensorflow.org/api_docs/python/tf/keras/optimizers) |
+  |  Cost_function | str   | Name of cost function in `Tensorflow`. Examples: [`tf.keras.losses`](https://www.tensorflow.org/api_docs/python/tf/keras/losses) |
+  |  Metrics | list   | A list of metrics to evaluate the model. Examples: [`tf.keras.metrics`](https://www.tensorflow.org/api_docs/python/tf/keras/metrics) |
+  |  Batch_size | int   | The batch size. See [`tf.keras.Model.fit`](https://www.tensorflow.org/api_docs/python/tf/keras/Model#fit)  |
+  |  Epochs | int   | Number of epochs for training. See [`tf.keras.Model.fit`](https://www.tensorflow.org/api_docs/python/tf/keras/Model#fit) |
+  |  Verbose | int   | Verbosity mode. See [`tf.keras.Model.fit`](https://www.tensorflow.org/api_docs/python/tf/keras/Model#fit)  |
+  |  Regularization | bool   | Whether to used the L2 regularization. See [`tf.keras.regularizers.L2`](https://www.tensorflow.org/api_docs/python/tf/keras/regularizers/L2). |
+  |  Model_save_path | str   | A folder to store the well-trained NN model. |
+  |  Log_save_path | str   | A folder to store the training log. |
+  |  Prediction_save_path | str   | A folder to store the predictions of input features after training. |
+  |  SEED | int    | Random seed for shuffling input dataset. |
+
 ### Collect input features and labels  
 ```python    
 from prepare_input import x_main, y_main
@@ -168,5 +190,6 @@ python ANN.py
   |  HECC                 | High-entropy carbide ceramic    |  
   |  ML                   | Machine learning    | 
   |  [SOAP](https://singroup.github.io/dscribe/latest/tutorials/descriptors/soap.html) | Smooth overlap of atomic positions    |  
+  | NN | Neural networks |
  
 
