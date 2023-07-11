@@ -60,7 +60,6 @@ df0 = pd.DataFrame({
 df1 = pd.DataFrame(prediction_mean, columns=['B', 'G', 'E', 'Hv', 'C11', 'C44'])
 df = pd.concat([df0, df1], axis=1)
 
-df.to_csv('ANN_predictions.csv')
 df_B = df.sort_values(by=['B'], ascending=False)
 df_G = df.sort_values(by=['G'], ascending=False)
 df_E = df.sort_values(by=['E'], ascending=False)

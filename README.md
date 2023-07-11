@@ -167,15 +167,46 @@ python ANN.py
 
 ### Check training results
 - Generated files/folders  
-  - `checkpoint`: 
+  - `checkpoint`: A folder for [`PCA`](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html#sklearn-decomposition-pca) model, NN model, and other information for generating input features.
+    - `cp.ckpt`: Location of NN model.
+    - `log`: Learning curves and weights of all CV models.
+    - `pred`: Predictions of input features.
+	    - prediction_all.txt: all CV models.
+	    - prediction_mean.txt: average of CV models.
+	- pca_model.joblib: [`PCA`](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html#sklearn-decomposition-pca) model.
+	- scale_range.json: Range to rescale input features.
+	- scale_range_1.json: Range to rescale input features again.
 
 ### Predict
+- After, run the following python code:  
+```python
+from HeccLib import predict_formula  
+pf = predict_formula(config='input_config.json',ckpt_file='checkpoint')  
+pf.predict(*['VNbTa', 'TiNbTa'])  
+```
+- The mechanical properties of (VNbTa)C3 and (TiNbTa)C3 will show on the screen. The specific modulus of each column is: B, G, E, Hv, C11, C44.
+```python
+array([[294.43195 , 203.70157 , 496.67032 ,  25.989697, 632.3356  ,
+        175.50716 ],
+       [283.17245 , 201.96506 , 489.7816  ,  26.824062, 607.07336 ,
+        178.52579 ]], dtype=float32)
+```
 
 ### High-throughput predict
+- Run the script for high-throughput prediction: [hp.py](hp.py)  
+```console
+python hp.py
+```
+- Output: ANN_predictions.xlsx
 
-### Ternary plot
-
-
+### Ternary plot  
+- Modify this [line](ternary_plot.py#L18) to specify the elements. Example: `elements = ['VNbTa', 'Ti', 'Hf']`.
+- Run the script for the raw data of ternary plot: [ternary_plot.py](ternary_plot.py)  
+```console
+python ternary_plot.py
+```
+- Output: **_diagram.csv
+- Plot.
 
 # Other scripts
 
@@ -187,8 +218,10 @@ python ANN.py
   |  -------------------- | ----------  |  
   |  MTMC                 | Multi-component transition metal carbides    |  
   |  HECC                 | High-entropy carbide ceramic    |  
+  |  HEC                  | High-entropy ceramic    |
   |  ML                   | Machine learning    | 
   |  [SOAP](https://singroup.github.io/dscribe/latest/tutorials/descriptors/soap.html) | Smooth overlap of atomic positions    |  
   | NN | Neural networks |
+  | CV | cross validation |
  
 
