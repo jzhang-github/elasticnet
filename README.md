@@ -33,7 +33,7 @@ We recommend using a Linux/Windows operating system to run the following example
 ### Install under [conda](https://conda.io/projects/conda/en/latest/user-guide/install/index.html) environment
 
 - Create a new environment   
-```console
+```bat
 conda create -n MTMC python==3.10
 ```
 
