@@ -1,4 +1,4 @@
-![PyPI - Downloads](https://img.shields.io/pypi/dm/elasticnet)  [![DOI](https://zenodo.org/badge/664905835.svg)](https://zenodo.org/badge/latestdoi/664905835)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/elasticnet)  [![DOI](https://zenodo.org/badge/664905835.svg)](https://zenodo.org/badge/latestdoi/664905835) ![GitHub](https://img.shields.io/github/license/jzhang-github/elasticnet)  ![PyPI - Wheel](https://img.shields.io/pypi/wheel/elasticnet) ![GitHub tag (with filter)](https://img.shields.io/github/v/tag/jzhang-github/elasticnet)  
 
 # Elastic net  
 ### **Machine learning model for predicting multi-component transition metal carbides (MTMCs)**
@@ -200,7 +200,7 @@ if __name__ == '__main__':
 	- scale_range_1.json: Range to rescale input features again.
 
 ### Predict
-- After, run the following python code:  
+- After training, run the following python code:  
 ```python
 from elasticnet import predict_formula  
 pf = predict_formula(config='input_config.json',ckpt_file='checkpoint')  
