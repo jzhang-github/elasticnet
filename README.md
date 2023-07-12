@@ -46,13 +46,13 @@ conda activate ElasticNet
 
 - Install package  
 ```console
-conda install elasticnet
+pip install elasticnet
 ```
 
 ### Alternatively, you can install with [pip](https://pypi-url).
-- Install the package  
+- Install the package. User `--user` if you don't have the root permission.  
 ```console
-pip install elasticnet
+pip install elasticnet --user
 ```
 
 - **If your IP locates in mainland China, you may need to install it from the tsinghua mirror.**  
