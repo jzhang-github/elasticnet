@@ -10,3 +10,5 @@ dist
 *_diagram.csv
 phase_diagrams
 formulas.txt
+meta.yaml
+bld.bat

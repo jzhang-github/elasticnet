@@ -1,6 +1,5 @@
-![PyPI - Downloads](https://img.shields.io/pypi/dm/elasticnet)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/elasticnet) 
 
-, conda icon, package doi icon.
 # Elastic net  
 ### **Machine learning model for predicting multi-component transition metal carbides (MTMCs)**
 ### This is the manual to reproduce  results and support conclusions of ***Lattice Distortion Informed Exceptional Multi-Component Transition Metal Carbides Discovered by Machine Learning***.
