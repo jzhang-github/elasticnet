@@ -3,3 +3,4 @@ __pycache__
 y_data.txt
 x_data_after_pca.txt
 x_data_init.txt
+.pypirc

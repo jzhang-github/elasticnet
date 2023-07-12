@@ -9,7 +9,7 @@ from distutils.core import setup
 from setuptools import find_packages
 with open("README.md", "r") as f:
   long_description = f.read()
-setup(name='mtmc',
+setup(name='elastic-net',
       version='1.0.0',
       python_requires='>=3.9',
       description='Predict the mechanical properties of multi-component transition metal carbides (MTMCs).',
@@ -35,7 +35,7 @@ setup(name='mtmc',
                 'License :: OSI Approved :: MIT License',
           'Intended Audience :: Developers',
           'Operating System :: OS Independent',
-          'Natural Language :: Chinese (Simplified)',
+          'Natural Language :: English',
           'Programming Language :: Python',
           'Programming Language :: Python :: 3.10',
           'Topic :: Software Development :: Libraries'
