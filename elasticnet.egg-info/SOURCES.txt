@@ -1,0 +1,8 @@
+LICENSE
+README.md
+setup.py
+elasticnet.egg-info/PKG-INFO
+elasticnet.egg-info/SOURCES.txt
+elasticnet.egg-info/dependency_links.txt
+elasticnet.egg-info/requires.txt
+elasticnet.egg-info/top_level.txt

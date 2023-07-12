@@ -1,5 +1,5 @@
 Metadata-Version: 2.1
-Name: elastic-net
+Name: elasticnet
 Version: 1.0.0
 Summary: Predict the mechanical properties of multi-component transition metal carbides (MTMCs).
 Home-page: https://github.com/jzhang-github/MTMC_elastic_modulus
@@ -11,7 +11,7 @@ Classifier: Development Status :: 3 - Alpha
 Classifier: License :: OSI Approved :: MIT License
 Classifier: Intended Audience :: Developers
 Classifier: Operating System :: OS Independent
-Classifier: Natural Language :: Chinese (Simplified)
+Classifier: Natural Language :: English
 Classifier: Programming Language :: Python
 Classifier: Programming Language :: Python :: 3.10
 Classifier: Topic :: Software Development :: Libraries
@@ -19,7 +19,9 @@ Requires-Python: >=3.9
 Description-Content-Type: text/markdown
 License-File: LICENSE
 
-pip icon, conda icon, package doi icon.
+![PyPI - Downloads](https://img.shields.io/pypi/dm/elasticnet)
+
+, conda icon, package doi icon.
 # Elastic net  
 ### **Machine learning model for predicting multi-component transition metal carbides (MTMCs)**
 ### This is the manual to reproduce  results and support conclusions of ***Lattice Distortion Informed Exceptional Multi-Component Transition Metal Carbides Discovered by Machine Learning***.
@@ -160,7 +162,7 @@ array([[294.43195 , 203.70157 , 496.67032 ,  25.989697, 632.3356  ,
 ### Run main function
 
 ```console
-python -m elastic-net
+python -m elasticnet
 ```
 
 The following python code will be executed.

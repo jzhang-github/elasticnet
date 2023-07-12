@@ -1,4 +1,5 @@
-![PyPI - Downloads](https://img.shields.io/pypi/dm/elastic-net)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/elasticnet)
+
 , conda icon, package doi icon.
 # Elastic net  
 ### **Machine learning model for predicting multi-component transition metal carbides (MTMCs)**
@@ -140,7 +141,7 @@ array([[294.43195 , 203.70157 , 496.67032 ,  25.989697, 632.3356  ,
 ### Run main function
 
 ```console
-python -m elastic-net
+python -m elasticnet
 ```
 
 The following python code will be executed.
