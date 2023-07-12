@@ -16,6 +16,7 @@ We recommend using a Linux/Windows operating system to run the following example
 - [Train a new model from scratch](#train-a-new-model-from-scratch)   
   - [Prepare DFT calculations](#prepare-DFT-calculations)  
   - [Collect DFT results](#collect-DFT-results)  
+  - [Run main function](#run-main-function) 
   - [Collect input features and labels](#collect-input-features-and-labels)  
   - [Train](#train)  
   - [Check training results](#check-training-results)   
@@ -35,28 +36,28 @@ We recommend using a Linux/Windows operating system to run the following example
 
 - Create a new environment   
 ```console
-conda create -n MTMC python==3.10
+conda create -n ElasticNet python==3.10
 ```
 
 - Activate the environment  
 ```console
-conda activate MTMC
+conda activate ElasticNet
 ```
 
 - Install package  
 ```console
-conda install mtmc
+conda install elasticnet
 ```
 
 ### Alternatively, you can install with [pip](https://pypi-url).
 - Install the package  
 ```console
-pip install mtmc
+pip install elasticnet
 ```
 
 - **If your IP locates in mainland China, you may need to install it from the tsinghua mirror.**  
 ```console
-pip install mtmc -i https://pypi.tuna.tsinghua.edu.cn/simple
+pip install elasticnet -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
 
@@ -76,7 +77,7 @@ pandas==1.5.3
 - Download the well-trained parameters: [checkpoint](checkpoint)  
 - Run the following python code:  
 ```python
-from HeccLib import predict_formula  
+from elasticnet import predict_formula  
 pf = predict_formula(config='input_config.json',ckpt_file='checkpoint')  
 pf.predict(*['VNbTa', 'TiNbTa'])  
 ```
@@ -148,12 +149,12 @@ The following python code will be executed.
 ```python
 def main():
     # prepare dataset
-    from prepare_input import x_main, y_main
+    from elasticnet.prepare_input import x_main, y_main
     x_main('input_config.json', load_PCA=False, save_PCA=True)
     y_main('input_config.json')
 
     # train
-    from ANN import CV_ML_RUN, load_and_pred
+    from elasticnet.ann import CV_ML_RUN, load_and_pred
     CV_ML_RUN('train.json')
     load_and_pred('train.json', 'x_data_after_pca.txt', write_pred_log=True, drop_cols=None)
 
@@ -164,7 +165,7 @@ You may want to prepare the dataset and train the model in separate steps, see b
 
 ### Collect input features and labels  
 ```python    
-from prepare_input import x_main, y_main
+from elasticnet.prepare_input import x_main, y_main
 x_main('input_config.json', load_PCA=False, save_PCA=True)
 y_main('input_config.json')
 ```
@@ -175,24 +176,23 @@ Three files will be generated:
 - `y_data.txt`: labels
 
 ### Train  
-- Run the following python code on Linux OS.  
+- Run the following python code.  
 ```python
-from ANN import CV_ML_RUN, load_and_pred
+from elasticnet import CV_ML_RUN, load_and_pred
 if __name__ == '__main__':
     CV_ML_RUN('train.json')
     load_and_pred('train.json', 'x_data_after_pca.txt', write_pred_log=True, drop_cols=None)
 ```
 
-- If you want to train the model on windows OS, you need to run the [source code](ANN.py) directly.  
-```console
-python ANN.py
-```
+- You can also execute `python -m elasticnet` directly in the console.  See [Run main function](#run-main-function).
+
 
 ### Check training results
 - Generated files/folders  
   - `checkpoint`: A folder for [`PCA`](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html#sklearn-decomposition-pca) model, NN model, and other information for generating input features.
     - `cp.ckpt`: Location of NN model.
     - `log`: Learning curves and weights of all CV models.
+	    - The file with extension `*.global.acc.loss` summarizes the model performance. Example: [4_layer-80_80_80_80_nodes.global.acc.loss](checkpoint/log/4_layer-80_80_80_80_nodes.global.acc.loss)  
     - `pred`: Predictions of input features.
 	    - prediction_all.txt: all CV models.
 	    - prediction_mean.txt: average of CV models.
