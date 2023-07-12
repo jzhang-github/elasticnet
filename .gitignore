@@ -4,3 +4,6 @@ y_data.txt
 x_data_after_pca.txt
 x_data_init.txt
 .pypirc
+ANN_predictions.xlsx
+elasticnet.egg-info
+dist

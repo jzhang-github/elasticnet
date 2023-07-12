@@ -203,9 +203,9 @@ if __name__ == '__main__':
 ### Predict
 - After, run the following python code:  
 ```python
-from HeccLib import predict_formula  
+from elasticnet import predict_formula  
 pf = predict_formula(config='input_config.json',ckpt_file='checkpoint')  
-pf.predict(*['VNbTa', 'TiNbTa'])  
+pf.predict(*['VNbTa', 'TiNbTa'])   
 ```
 - The mechanical properties of (VNbTa)C3 and (TiNbTa)C3 will show on the screen. The specific modulus of each column is: B, G, E, Hv, C11, C44.
 ```python
@@ -218,7 +218,7 @@ array([[294.43195 , 203.70157 , 496.67032 ,  25.989697, 632.3356  ,
 ### High-throughput predict
 - Run the following python code:  
 ```python
-from HeccLib import high_throughput_predict
+from elasticnet import high_throughput_predict
 high_throughput_predict() 
 ```
 - Output: ANN_predictions.xlsx
@@ -226,7 +226,7 @@ high_throughput_predict()
 ### Ternary plot 
 - Run the following python code:  
 ```python
-from HeccLib import ternary_plot
+from elasticnet import ternary_plot
 ternary_plot(elements = ['Ti', 'Nb', 'Ta'])
 ``` 
 - Alternatively, `elements = ['VNbTa', 'Ti', 'Hf']`.
@@ -238,7 +238,7 @@ ternary_plot(elements = ['Ti', 'Nb', 'Ta'])
 ### Get ROM
 - Run the following python code:  
 ```python
-from HeccLib import get_rom
+from elasticnet import get_rom
 ROM = get_rom(config='input_config.json', formulas='formulas.txt', props=['B', 'G', 'E', 'Hv', 'VEC'])
 print(ROM)
 ```
