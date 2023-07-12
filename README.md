@@ -1,8 +1,7 @@
 pip icon, conda icon, package doi icon.
-# **Machine learning model for predicting multi-component transition metal carbides (MTMCs)**
+# Elastic net  
+### **Machine learning model for predicting multi-component transition metal carbides (MTMCs)**
 ### This is the manual to reproduce  results and support conclusions of ***Lattice Distortion Informed Exceptional Multi-Component Transition Metal Carbides Discovered by Machine Learning***.
-
-
 
 We recommend using a Linux/Windows operating system to run the following examples, under the [current directory](.).  
 
@@ -136,6 +135,28 @@ array([[294.43195 , 203.70157 , 496.67032 ,  25.989697, 632.3356  ,
   |  Log_save_path | str   | A folder to store the training log. |
   |  Prediction_save_path | str   | A folder to store the predictions of input features after training. |
   |  SEED | int    | Random seed for shuffling input dataset. |
+
+### Run main function
+
+```console
+python -m elastic-net
+```
+The following python code will be excuted.
+```python
+def main():
+    # prepare dataset
+    from prepare_input import x_main, y_main
+    x_main('input_config.json', load_PCA=False, save_PCA=True)
+    y_main('input_config.json')
+
+    # train
+    from ANN import CV_ML_RUN, load_and_pred
+    CV_ML_RUN('train.json')
+    load_and_pred('train.json', 'x_data_after_pca.txt', write_pred_log=True, drop_cols=None)
+
+main()
+```
+
 
 ### Collect input features and labels  
 ```python    
