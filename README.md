@@ -23,7 +23,7 @@ We recommend using a Linux/Windows operating system to run the following example
   - [High-throughput predict](#high-throughput-predict)  
   - [Ternary plot](#ternary-plot)  
 
-- [Other scripts](#other-scripts)
+- [Other scripts](#other-scripts) 
   - [Get ROM](#get-ROM)
   - [get VEC](#get-VEC)
 
@@ -49,7 +49,7 @@ pip install elasticnet
 ```
 
 ### Alternatively, you can install with [pip](https://pypi-url).
-- Install the package. User `--user` if you don't have the root permission.  
+- Install the package. Use `--user` option if you don't have the root permission.  
 ```console
 pip install elasticnet --user
 ```
