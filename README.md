@@ -141,7 +141,7 @@ array([[294.43195 , 203.70157 , 496.67032 ,  25.989697, 632.3356  ,
 ```console
 python -m elastic-net
 ```
-The following python code will be excuted.
+The following python code will be executed.
 ```python
 def main():
     # prepare dataset
@@ -157,6 +157,7 @@ def main():
 main()
 ```
 
+You may want to prepare the dataset and train the model in separate steps, see below ⬇️.
 
 ### Collect input features and labels  
 ```python    
