@@ -231,7 +231,7 @@ ternary_plot(elements = ['Ti', 'Nb', 'Ta'])
 ``` 
 - Alternatively, `elements = ['VNbTa', 'Ti', 'Hf']`.
 
-- Output: **_diagram.csv
+- Output: phase_diagrams/**_diagram.csv
 - Plot.
 
 # Other scripts

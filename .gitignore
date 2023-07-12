@@ -7,3 +7,6 @@ x_data_init.txt
 ANN_predictions.xlsx
 elasticnet.egg-info
 dist
+*_diagram.csv
+phase_diagrams
+formulas.txt
