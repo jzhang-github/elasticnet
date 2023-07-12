@@ -2,9 +2,8 @@ cff-version: 1.0.2
 message: "If you use this software, please cite it as below."
 authors:
   - family-names: Jun
-    given-names: ZHANG
+    given-names: Zhang
     orcid: https://orcid.org/0000-0001-8872-6153
-title: jzhang-github/elasticnet: elasticnet
-version: v1.0.2
+title: "My Research Software"
+version: 1.0.2
 date-released: 2023-07-12
-
