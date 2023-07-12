@@ -6,7 +6,7 @@ Created on Wed Jul  6 21:57:03 2022
 """
 
 import numpy as np
-from HeccLib import HecFeatureGenerator, HecPropertyParser, HecFeatureParser, FileTypeError, soap_feature
+from elasticnet.lib import HecFeatureGenerator, HecPropertyParser, HecFeatureParser, FileTypeError, soap_feature
 import json
 import os
 
