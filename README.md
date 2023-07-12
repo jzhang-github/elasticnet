@@ -1,4 +1,4 @@
-![PyPI - Downloads](https://img.shields.io/pypi/dm/elasticnet) 
+![PyPI - Downloads](https://img.shields.io/pypi/dm/elasticnet)  [![DOI](https://zenodo.org/badge/664905835.svg)](https://zenodo.org/badge/latestdoi/664905835)
 
 # Elastic net  
 ### **Machine learning model for predicting multi-component transition metal carbides (MTMCs)**
