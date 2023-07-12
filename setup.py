@@ -9,7 +9,7 @@ from distutils.core import setup
 from setuptools import find_packages
 with open("README.md", "r") as f:
   long_description = f.read()
-setup(name='elastic-net',
+setup(name='elasticnet',
       version='1.0.0',
       python_requires='>=3.9',
       description='Predict the mechanical properties of multi-component transition metal carbides (MTMCs).',
