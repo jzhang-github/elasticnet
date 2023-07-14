@@ -48,7 +48,7 @@ conda activate ElasticNet
 pip install elasticnet
 ```
 
-### Alternatively, you can install with [pip](https://pypi-url).
+### Alternatively, you can install with [pip](https://pypi.org/project/elasticnet/). 
 - Install the package. Use `--user` option if you don't have the root permission.  
 ```console
 pip install elasticnet --user
