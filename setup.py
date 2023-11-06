@@ -16,7 +16,7 @@ with open("README.md", "r") as f:
 #     requirements = [x.strip() for x in requirements]
 
 setup(name='elasticnet',
-      version='1.0.2',
+      version='1.0.3',
       python_requires='>=3.9',
       description='Predict the mechanical properties of multi-component transition metal carbides (MTMCs).',
       long_description=long_description,
