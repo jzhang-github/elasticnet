@@ -1,6 +1,6 @@
-numpy>=1.25.0
-scikit-learn>=1.2.2
-tensorflow>=2.10.0
-ase>=3.22.1
-pandas>=1.5.3
-openpyxl>=3.0
+numpy==1.25.0
+scikit-learn==1.2.2
+tensorflow==2.10.0
+ase==3.22.1
+pandas==1.5.3
+openpyxl==3.0
