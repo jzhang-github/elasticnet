@@ -9,7 +9,7 @@ from distutils.core import setup
 from setuptools import find_packages
 
 
-with open("README.md", "r") as f:
+with open("README.md", "r", encoding='utf-8') as f:
   long_description = f.read()
 
 # with open('requirements.txt', "r") as f:
