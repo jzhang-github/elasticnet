@@ -3,7 +3,7 @@
     "split_test": false,
     "clean_by_pearson_r": false,
     "reduce_dimension_by_pca": true,
-    "prop_precursor_path": "files/HECC_precursors.csv",
+    "prop_precursor_path": "files/MTMC_precursors.csv",
     "model_save_path": "checkpoint",
     "props": [
         "volume_per_formula",
@@ -26,7 +26,7 @@
         "square",
         "cube"
     ],
-    "HECC_properties_path": "files/HECC_properties_over_sample.CSV",
+    "HECC_properties_path": "files/MTMC_properties.CSV",
     "labels": [
         "B",
         "G",
