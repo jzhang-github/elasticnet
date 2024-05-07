@@ -1,9 +1,8 @@
 {
     "Nodes_per_layer": [
-        80,
-        80,
-        80,
-        80
+        4,
+        4,
+        4
     ],
     "Number_of_fold": 5,
     "feature_file": "x_data.txt",
