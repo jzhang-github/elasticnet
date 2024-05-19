@@ -1,0 +1,45 @@
+{
+    "include_more": false,
+    "split_test": false,
+    "clean_by_pearson_r": false,
+    "reduce_dimension_by_pca": true,
+    "prop_precursor_path": "MTMC_precursors.csv",
+    "model_save_path": "checkpoint",
+    "props": [
+        "volume_per_formula",
+        "m",
+        "rho",
+        "VEC",
+        "Pauling_X",
+        "Allen_X",
+        "group",
+        "periodic",
+        "C11",
+        "C12",
+        "C44",
+        "melting_point_of_sable_compound"
+    ],
+    "operators": [
+        "sqrt", 
+        "square",
+        "cube"
+    ],
+    "HECC_properties_path": "MTMC_properties.CSV",
+    "labels": [
+        "B",
+        "G",
+        "E",
+        "Hv",
+        "C11",
+        "C44"
+    ],
+    "soap_features": false,
+    "soap_config":{"input_structure_type": "CONTCAR",
+                   "nmax": 5,
+                   "lmax": 5,
+                   "n_jobs": 1,
+                   "rcut": 5.0,
+                   "sigma": 0.5,
+                   "species": ["C", "Ti", "V", "Cr", "Zr", "Nb", "Mo", "Hf", "Ta", "W"],
+                   "n_components": 150}
+}
