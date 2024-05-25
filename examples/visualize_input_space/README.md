@@ -1,6 +1,6 @@
-# Click [here](Train_ANN.ipynb)
+# Click [here](visualize_input_space.ipynb)
 
 You can start your jupyter notebook in your command console:
 ```
-jupyter notebook --notebook-dir='./examples/use_ANN_only'
+jupyter notebook --notebook-dir='.'
 ```
