@@ -2,7 +2,7 @@
 
 # Elastic net  
 ### **Machine learning model for predicting multi-component transition metal carbides (MTMCs)**
-### This is the manual to reproduce  results and support conclusions of ***Lattice Distortion Informed Exceptional Multi-Component Transition Metal Carbides Discovered by Machine Learning***.
+### This is the manual to reproduce  results and support conclusions of [***Lattice Distortion Informed Exceptional Multi-Component Transition Metal Carbides Discovered by Machine Learning***](https://www.nature.com/articles/s41524-024-01351-1).
 
 We recommend using a Linux/Windows operating system to run the following examples, under the [current directory](.).  
 
